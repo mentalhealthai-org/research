@@ -24,11 +24,10 @@ This document records technical and scientific limitations found during the inte
   - [Granary Issue #197](https://github.com/snarfed/granary/issues/197)
 
 ### ⚠️ Tracebacks:
-```bash
-granary.source.ApiError: Twitter API returned 403 Forbidden
-ValueError: Only unicode objects are escapable. Got None of type <class 'NoneType'>
-ScraperException: SSLCertVerificationError when using snscrape
-```
+
+> granary.source.ApiError: Twitter API returned 403 Forbidden
+> ValueError: Only unicode objects are escapable. Got None of type <class 'NoneType'>
+> ScraperException: SSLCertVerificationError when using snscrape
 
 ### Notes:
 - Twitter’s increasing paywall is incompatible with open science principles.
@@ -57,10 +56,8 @@ ScraperException: SSLCertVerificationError when using snscrape
 - Requires elevated permissions and app review.
 
 ### Tracebacks:
-```bash
-OAuthException: (#10) Application does not have permission for this action
-RuntimeError: Facebook API error: An active access token must be used to query information
-```
+> OAuthException: (#10) Application does not have permission for this action
+: RuntimeError: Facebook API error: An active access token must be used to query information
 
 ---
 
@@ -82,5 +79,3 @@ RuntimeError: Facebook API error: An active access token must be used to query i
 - [Tweepy Docs](https://docs.tweepy.org/en/stable/)
 - [Facebook Graph API](https://developers.facebook.com/docs/graph-api/)
 - [Instagram API](https://developers.facebook.com/docs/instagram-api)
-
-```
