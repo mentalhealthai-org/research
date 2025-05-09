@@ -15,8 +15,12 @@ SANDBOX_API_ENDPOINTS = {
              "&types=sleep_regularity&types=sleep_latency&types=sleep_efficiency"),
     "steps": "https://sandbox-api.sahha.ai/api/v1/profile/biomarker/{user_id}?categories=activity&startDateTime={start_datetime}&endDateTime={end_datetime}&types=steps",
     "token" : "https://sandbox-api.sahha.ai/api/v1/oauth/account/token",
-    "health": "https://sandbox-api.sahha.ai/api/v1/profile/biomarker/{user_id}?categories=activity&categories=sleep&endDateTime={end_datetime}&startDateTime={start_datetime}&types=steps&types=active_duration&types=sleep_start_time&types=sleep_end_time&types=sleep_duration&types=sleep_light_duration&types=sleep_rem_duration&types=sleep_deep_duration", # fetch activity and sleep data
-    # TODO: check why vitals isn't working "vitals": "",
+    "health": ("https://sandbox-api.sahha.ai/api/v1/profile/biomarker/{user_id}"
+              "?categories=activity&categories=sleep&categories=vitals&endDateTime={end_datetime}"
+              "&startDateTime={start_datetime}&types=steps&types=active_duration"
+              "&types=sleep_start_time&types=sleep_end_time&types=sleep_duration"
+              "&types=sleep_light_duration&types=sleep_rem_duration"
+              "&types=sleep_deep_duration&types=heart_rate_sleep"), # fetch all health data
 }
 
 # helper functions
@@ -62,8 +66,7 @@ def get_auth_token(client_id, client_secret):
     r = requests.post(url=SANDBOX_API_ENDPOINTS["token"], headers=headers, json=data)
     if r.status_code == 200:
         return r.json()["accountToken"]
-    else:
-        raise Exception("Failed to get auth token")
+    raise Exception("Failed to get auth token")
 
 
 def get_steps(token, user_id):
@@ -73,8 +76,7 @@ def get_steps(token, user_id):
     r = requests.get(url=SANDBOX_API_ENDPOINTS["steps"].format(user_id=user_id, start_datetime=start_datetime, end_datetime=end_datetime), headers=headers)
     if r.status_code == 200:
         return r.json()
-    else:
-        raise Exception("Failed to get steps")
+    raise Exception("Failed to get steps")
 
 def get_device_information(token, user_id):
     """Gets patient's device(phone) basic information"""
@@ -82,8 +84,7 @@ def get_device_information(token, user_id):
     r = requests.get(url=SANDBOX_API_ENDPOINTS["device_information"].format(user_id=user_id), headers=headers)
     if r.status_code == 200:
         return r.json()
-    else:
-        raise Exception("Failed to get device information")
+    raise Exception("Failed to get device information")
 
 def get_demographic(token, user_id):
     """Gets user demographic data"""
@@ -91,8 +92,7 @@ def get_demographic(token, user_id):
     r = requests.get(url=SANDBOX_API_ENDPOINTS["demographic"].format(user_id=user_id), headers=headers)
     if r.status_code == 200:
         return r.json()
-    else:
-        raise Exception("Failed to get demographic data")
+    raise Exception("Failed to get demographic data")
 
 def get_sleep(token, user_id):
     """Gets user sleep data"""
@@ -101,8 +101,7 @@ def get_sleep(token, user_id):
     r = requests.get(url=SANDBOX_API_ENDPOINTS["sleep"].format(user_id=user_id, start_datetime=start_datetime, end_datetime=end_datetime), headers=headers)
     if r.status_code == 200:
         return r.json()
-    else:
-        raise Exception("Failed to get sleep data")
+    raise Exception("Failed to get sleep data")
 
 def get_health(token, user_id, datetime=None):
     """Get users activity and sleep data in one request"""
@@ -115,7 +114,5 @@ def get_health(token, user_id, datetime=None):
     r = requests.get(url=SANDBOX_API_ENDPOINTS["health"].format(user_id=user_id, start_datetime=start_datetime, end_datetime=end_datetime), headers=headers)
     if r.status_code == 200:
         return r.json()
-    else:
-        raise Exception("Failed to get health data")
-    
+    raise Exception("Failed to get health data")
     
