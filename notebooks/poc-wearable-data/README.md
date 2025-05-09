@@ -34,8 +34,10 @@ jupyter lab
 
 ### Envionment Variables
 
-Before running the demo, an .env file must be proveided based on `.env-template`.
-In a *nix environment, in a shell:
+Before running the demo an .env file must be provided based on the `.env-template` file.
+Copy `.env-template` as `.env` and add the environment variables values. 
+
+In a *nix environment:
 
 ```bash
 cp .env-template .env
